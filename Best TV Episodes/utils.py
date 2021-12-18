@@ -20,5 +20,5 @@ def sanitize_entry(user_input: str):
     title = ""
     if len(user_input_split) > 3:
         for i in range(3, len(user_input_split)):
-            title += user_input_split[i]
-    return [season, episode, title]
+            title += user_input_split[i] + " "
+    return [season, episode, title[:-1]]
