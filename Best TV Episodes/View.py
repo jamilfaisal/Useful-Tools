@@ -36,7 +36,3 @@ class View:
     @staticmethod
     def enter_valid_entry():
         print("Enter a valid entry!")
-
-
-main = View()
-main.main_interface()
