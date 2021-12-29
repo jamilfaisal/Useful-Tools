@@ -21,7 +21,7 @@ class View:
             elif choice == 2:
                 self.display_database()
             elif choice == 3:
-                self.ask_import_data()
+                self.controller.import_data()
             elif choice == 4:
                 self.controller.autosave()
             elif choice == 5:
@@ -34,17 +34,6 @@ class View:
         for ep in all_episodes_sorted:
             print(ep)
 
-    def ask_import_data(self):
-        choice = input(interface_messages["import_data"])
-        if choice == 1:
-            self.controller.import_paste_data()
-        elif choice == 2:
-            self.controller.import_from_file()
-        elif choice == 3:
-            return
-        else:
-            return
-
     @staticmethod
     def ask_episode_entry():
         return input(user_input_messages["enter_episode_format"])
@@ -52,3 +41,11 @@ class View:
     @staticmethod
     def enter_valid_entry():
         print(error_messages["invalid_entry"])
+
+    @staticmethod
+    def import_success():
+        print(information_messages["import_success"])
+
+    @staticmethod
+    def import_fail():
+        print(error_messages["import_fail"])

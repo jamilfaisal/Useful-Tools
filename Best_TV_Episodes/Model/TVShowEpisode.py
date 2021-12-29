@@ -9,6 +9,9 @@ class TVShowEpisode:
     def increase(self):
         self.count += 1
 
+    def set_count(self, count):
+        self.count = count
+
     def set_title(self, title):
         self.title = title
 

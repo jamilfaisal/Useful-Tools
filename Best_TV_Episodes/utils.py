@@ -4,6 +4,3 @@ def sanitize_input(choice: str):
         return choice
     except ValueError:
         return -1
-
-
-
