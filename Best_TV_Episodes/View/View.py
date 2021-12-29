@@ -52,4 +52,3 @@ class View:
     @staticmethod
     def enter_valid_entry():
         print(error_messages["invalid_entry"])
-
