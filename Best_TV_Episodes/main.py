@@ -1,4 +1,4 @@
-from View import View
+from View.View import View
 
 
 main = View()
