@@ -1,21 +1,20 @@
 from Best_TV_Episodes.Controller.EpisodeAdder import EpisodeAdder
-from Best_TV_Episodes.Controller.Importer import Importer
+from Best_TV_Episodes.Controller.DataPersist import Importer, Exporter
 
 
 class Controller:
     def __init__(self, view):
         self.database = {}
         self.view = view
-        self.episode_adder = EpisodeAdder()
-        self.importer = Importer()
 
     def add_episodes(self):
+        episode_adder = EpisodeAdder()
         while True:
-            season_episode_title_not_sanitized = self.view.ask_episode_entry()
+            season_episode_title_not_sanitized = self.view.display_user_input("enter_episode_format")
             if season_episode_title_not_sanitized == "q":
                 return None
-            if self.episode_adder.add_episodes(self.database, season_episode_title_not_sanitized) == -1:
-                self.view.enter_valid_entry()
+            if episode_adder.add_episodes(self.database, season_episode_title_not_sanitized) == -1:
+                self.view.display_error_message("invalid_entry")
 
     def get_all_episodes(self):
         all_episodes = [self.database[k] for k in self.database]
@@ -23,10 +22,18 @@ class Controller:
         return all_episodes
 
     def import_data(self):
-        result = self.importer.import_data()
-        if result is dict:
+        importer = Importer()
+        result = importer.import_data()
+        if type(result) is dict:
             self.database = result
-            self.view.import_success()
+            self.view.display_information_message("import_success")
         else:
-            self.view.import_fail()
-            print(result)
+            self.view.display_error_message("import_fail")
+
+    def export_data(self):
+        exporter = Exporter()
+        file_name = self.view.display_user_input("enter_export_file_name")
+        if exporter.export_data(self.database, file_name) == -1:
+            self.view.display_error_message("export_fail")
+        else:
+            self.view.display_information_message("export_success")

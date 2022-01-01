@@ -12,9 +12,9 @@ class View:
         interface = interface_messages["main_interface"]
         while True:
             print(interface)
-            choice = sanitize_input(input(user_input_messages["main_interface"]))
+            choice = sanitize_input(self.display_user_input("main_interface"))
             if choice == -1:
-                print(error_messages["invalid_choice"])
+                self.display_error_message("invalid_choice")
                 continue
             elif choice == 1:
                 self.controller.add_episodes()
@@ -23,8 +23,10 @@ class View:
             elif choice == 3:
                 self.controller.import_data()
             elif choice == 4:
-                self.controller.autosave()
+                self.controller.export_data()
             elif choice == 5:
+                self.controller.autosave()
+            elif choice == 6:
                 break
 
     def display_database(self):
@@ -35,17 +37,13 @@ class View:
             print(ep)
 
     @staticmethod
-    def ask_episode_entry():
-        return input(user_input_messages["enter_episode_format"])
+    def display_error_message(key):
+        print(error_messages[key])
 
     @staticmethod
-    def enter_valid_entry():
-        print(error_messages["invalid_entry"])
+    def display_user_input(key):
+        return input(user_input_messages[key])
 
     @staticmethod
-    def import_success():
-        print(information_messages["import_success"])
-
-    @staticmethod
-    def import_fail():
-        print(error_messages["import_fail"])
+    def display_information_message(key):
+        print(information_messages[key])
