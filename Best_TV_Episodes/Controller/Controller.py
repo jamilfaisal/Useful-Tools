@@ -18,6 +18,7 @@ class Controller:
 
     def get_all_episodes(self):
         all_episodes = [self.database[k] for k in self.database]
+        all_episodes.sort(key=lambda x: x.season)
         all_episodes.sort(key=lambda x: x.count, reverse=True)
         return all_episodes
 
