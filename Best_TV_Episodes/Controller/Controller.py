@@ -1,11 +1,12 @@
 from Best_TV_Episodes.Controller.EpisodeAdder import EpisodeAdder
-from Best_TV_Episodes.Controller.DataPersist import Importer, Exporter
+from Best_TV_Episodes.Controller.DataPersist import Importer, Exporter, AutoSave
 
 
 class Controller:
     def __init__(self, view):
         self.database = {}
         self.view = view
+        self.autosaver = None
 
     def add_episodes(self):
         episode_adder = EpisodeAdder()
@@ -23,8 +24,7 @@ class Controller:
         return all_episodes
 
     def import_data(self):
-        importer = Importer()
-        result = importer.import_data()
+        result = Importer().import_data()
         if type(result) is dict:
             self.database = result
             self.view.display_information_message("import_success")
@@ -32,9 +32,25 @@ class Controller:
             self.view.display_error_message("import_fail")
 
     def export_data(self):
-        exporter = Exporter()
-        file_name = self.view.display_user_input("enter_export_file_name")
-        if exporter.export_data(self.database, file_name) == -1:
+        if Exporter().export(self.database) == -1:
             self.view.display_error_message("export_fail")
         else:
             self.view.display_information_message("export_success")
+
+    def autosave(self):
+        if self.autosaver is None:
+            self.autosaver = AutoSave(self)
+            if self.autosaver.autosave_first_start() == -1:
+                self.view.display_error_message("autosave_fail")
+            else:
+                self.view.display_information_message("autosave_turned_on")
+        else:
+            self.autosaver.autosave_stop()
+            self.autosaver = None
+            self.view.display_information_message("autosave_turned_off")
+
+    def exit(self):
+        if self.autosaver:
+            self.autosaver.autosave_stop()
+            self.autosaver = None
+        exit(0)

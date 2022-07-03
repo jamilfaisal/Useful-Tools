@@ -9,9 +9,8 @@ class View:
         self.controller = Controller(self)
 
     def main_interface(self):
-        interface = interface_messages["main_interface"]
         while True:
-            print(interface)
+            self.display_interface()
             choice = sanitize_input(self.display_user_input("main_interface"))
             if choice == -1:
                 self.display_error_message("invalid_choice")
@@ -27,7 +26,15 @@ class View:
             elif choice == 5:
                 self.controller.autosave()
             elif choice == 6:
+                self.controller.exit()
                 break
+
+    def display_interface(self):
+        if self.controller.autosaver is None:
+            interface = interface_messages["main_interface_autosave_off"]
+        else:
+            interface = interface_messages["main_interface_autosave_on"]
+        print(interface)
 
     def display_database(self):
         all_episodes_sorted = self.controller.get_all_episodes()

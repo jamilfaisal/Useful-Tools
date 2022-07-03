@@ -4,12 +4,13 @@ from Best_TV_Episodes.utils import sanitize_input
 
 class EpisodeAdder:
 
-    def add_episodes(self, database, episode_title_unsanitized):
-        entry = self.sanitize_episode_entry(episode_title_unsanitized)
+    @staticmethod
+    def add_episodes(database, episode_title_unsanitized):
+        entry = EpisodeAdder.sanitize_episode_entry(episode_title_unsanitized)
         if entry == -1:
             return -1
         else:
-            self.add_episode(database, entry[0], entry[1], entry[2])
+            EpisodeAdder.add_episode(database, entry[0], entry[1], entry[2])
             return 0
 
     @staticmethod
