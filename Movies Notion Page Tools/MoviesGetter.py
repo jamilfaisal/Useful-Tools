@@ -74,9 +74,9 @@ def convert_to_movies_list(db):
     return movie_list
 
 
-def get_movies_list():
+def get_movies_list(database_filter=None):
     """
     Gets all movies from the Movie database as Movie instances
     :return: A list of Movie instances
     """
-    return convert_to_movies_list(get_database())
+    return convert_to_movies_list(get_database(database_filter))
