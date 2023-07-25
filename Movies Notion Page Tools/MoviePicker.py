@@ -5,7 +5,7 @@ if __name__ == "__main__":
         print("Select from the following options")
         print("1. Pick a random movie")
         print("2. Pick best movies based on IMDB")
-        print("3. Pick worse movies based on IMDB")
+        print("3. Pick worst movies based on IMDB")
         user_choice = input()
         if user_choice == "1":
             RandomMoviePicker.pick_a_random_movie()

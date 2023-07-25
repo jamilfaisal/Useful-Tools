@@ -41,8 +41,11 @@ def get_imdb_rating(movie):
     return movie.imdb_rating
 
 
-def sort_movie_list_by_imdb_rating(movie_list):
-    return sorted(movie_list, key=get_imdb_rating)
+def sort_movie_list_by_imdb_rating(movie_list, worst=False):
+    if worst:
+        return sorted(movie_list, key=get_imdb_rating, reverse=True)
+    else:
+        return sorted(movie_list, key=get_imdb_rating)
 
 
 def display_movies(movie_list, number_of_movies):
@@ -58,5 +61,15 @@ def pick_best_movies():
     print("Got movie list")
     add_imdb_rating_to_movies(movie_list)
     sorted_movie_list = sort_movie_list_by_imdb_rating(movie_list)
+    print("Done sorting")
+    display_movies(sorted_movie_list, number_of_movies)
+
+
+def pick_worst_movies():
+    number_of_movies = ask_for_number_of_movies_to_show()
+    movie_list = get_list_of_unwatched_movies()
+    print("Got movie list")
+    add_imdb_rating_to_movies(movie_list)
+    sorted_movie_list = sort_movie_list_by_imdb_rating(movie_list, True)
     print("Done sorting")
     display_movies(sorted_movie_list, number_of_movies)
