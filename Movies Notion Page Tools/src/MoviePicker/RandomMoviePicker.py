@@ -1,5 +1,6 @@
 from random import choice
 from src.Getters.MoviesGetter import get_movies_list
+from src.MoviePicker.utils import get_list_of_unwatched_movies
 
 
 def print_movie_choice(movie_choice):
@@ -73,28 +74,5 @@ def pick_a_random_movie_with_person_wants_to_watch(name_of_person):
 
 
 def pick_a_random_movie():
-    # Get a list of movies from the database filtered by "Watch Status" == "Not Watched" or "Watching" or "Rewatch"
-    database_filter = {
-        "or": [
-            {
-                "property": "Watch Status",
-                "select": {
-                    "equals": "Not Watched"
-                }
-            },
-            {
-                "property": "Watch Status",
-                "select": {
-                    "equals": "Watching"
-                }
-            },
-            {
-                "property": "Watch Status",
-                "select": {
-                    "equals": "Rewatch"
-                }
-            }
-        ]
-    }
-    movie_list = get_movies_list(database_filter)
+    movie_list = get_list_of_unwatched_movies()
     pick_a_random_movie_from_list(movie_list)
