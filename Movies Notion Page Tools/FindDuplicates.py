@@ -1,4 +1,4 @@
-import MoviesGetter
+from src.Getters import MoviesGetter
 
 
 def find_duplicates(movie_lst):

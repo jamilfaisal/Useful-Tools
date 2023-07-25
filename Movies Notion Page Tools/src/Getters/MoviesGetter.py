@@ -3,7 +3,7 @@ import os
 
 import requests as requests
 
-from Movie import Movie
+from src.Data.Movie import Movie
 
 
 def get_database(database_filter=None):
@@ -12,7 +12,7 @@ def get_database(database_filter=None):
     :param database_filter: Optional filtering of the database
     :return: The Notion API GET response
     """
-    filename = os.path.join('secrets.json')
+    filename = os.path.join('src/secrets.json')
     try:
         with open(filename, mode='r') as f:
             secrets = json.loads(f.read())
