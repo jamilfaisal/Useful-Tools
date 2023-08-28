@@ -17,7 +17,7 @@ def get_database(database_filter=None):
         with open(filename, mode='r') as f:
             secrets = json.loads(f.read())
     except FileNotFoundError:
-        secrets = {}
+        raise FileNotFoundError("Could not find secrets.json in the src folder. This is required for authentication with Notion.")
 
     url = "https://api.notion.com/v1/databases/{}/query".format(secrets["DB_ID"])
     sorts = [
