@@ -19,6 +19,7 @@ def find_movie_duplicates():
     Finds movies with duplicate entries in the Movies database
     """
     movie_list = MoviesGetter.get_movies_list()
+    print("Got movie list. Finding duplicates")
     find_duplicates(movie_list)
 
 
