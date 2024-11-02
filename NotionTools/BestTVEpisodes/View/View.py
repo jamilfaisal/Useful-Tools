@@ -1,6 +1,6 @@
-from Best_TV_Episodes.Controller.Controller import Controller
-from Best_TV_Episodes.utils import sanitize_input
-from Best_TV_Episodes.View.messages import interface_messages, user_input_messages, error_messages, information_messages
+from NotionTools.BestTVEpisodes.Controller.Controller import Controller
+from NotionTools.BestTVEpisodes.Utils.utils import sanitize_input
+from NotionTools.BestTVEpisodes.View.messages import interface_messages, user_input_messages, error_messages, information_messages
 
 
 class View:
@@ -37,10 +37,11 @@ class View:
         print(interface)
 
     def display_database(self):
-        all_episodes_sorted = self.controller.get_all_episodes()
-        if len(all_episodes_sorted) == 0:
+        all_episodes = self.controller.get_all_episodes()
+        if len(all_episodes) == 0:
             print(information_messages["no_episodes_found"])
-        for ep in all_episodes_sorted:
+            return
+        for ep in all_episodes:
             print(ep)
 
     @staticmethod

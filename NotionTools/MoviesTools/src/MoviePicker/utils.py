@@ -1,4 +1,4 @@
-from src.Getters.MoviesGetter import get_movies_list
+from NotionTools.MoviesTools.src.Getters.MoviesGetter import get_movies_list
 
 
 def get_list_of_unwatched_movies():

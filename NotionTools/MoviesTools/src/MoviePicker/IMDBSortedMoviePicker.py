@@ -1,6 +1,6 @@
 from imdb import Cinemagoer
 
-from src.MoviePicker.utils import get_list_of_unwatched_movies
+from NotionTools.MoviesTools.src.MoviePicker.utils import get_list_of_unwatched_movies
 
 """
 TODO:
@@ -21,7 +21,7 @@ def ask_for_number_of_movies_to_show():
 
 def add_imdb_rating_to_movies(movie_list):
     for movie in movie_list:
-        imdb_rating = get_imdb_rating_for_movie(Cinemagoer(), movie.title)
+        imdb_rating, _, _ = get_imdb_rating_for_movie(Cinemagoer(), movie.title)
         print("Got rating for {}: {}".format(movie.title, imdb_rating))
         movie.set_imdb_rating(imdb_rating)
 
@@ -31,7 +31,7 @@ def get_imdb_rating_for_movie(cinemagoer, movie_title):
     if imdb_results:
         movie_id = imdb_results[0].movieID
         imdb_movie = cinemagoer.get_movie(movie_id)
-        return imdb_movie.data.get("rating")
+        return imdb_movie.data.get("rating"), imdb_movie.data.get("original title"), imdb_movie.data.get("year"),
     else:
         print("No IMDB results found for {}".format(movie_title))
         return None

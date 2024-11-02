@@ -5,7 +5,7 @@ import threading
 import tkinter
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 
-from Best_TV_Episodes.utils import sanitize_timer
+from NotionTools.BestTVEpisodes.Utils.utils import sanitize_timer, validate_file_name
 
 
 class Importer:
@@ -18,7 +18,7 @@ class Importer:
         root = tkinter.Tk()
         root.withdraw()
         root.wm_attributes('-topmost', 1)
-        return askopenfilename(parent=root)
+        return validate_file_name(askopenfilename(parent=root))
 
     @staticmethod
     def parse_data(file_name):
@@ -39,7 +39,7 @@ class Exporter:
         root = tkinter.Tk()
         root.withdraw()
         root.wm_attributes('-topmost', 1)
-        return asksaveasfilename(filetypes=(("pkl file", "*.pkl"),), defaultextension='.pkl')
+        return validate_file_name(asksaveasfilename(filetypes=(("pkl file", "*.pkl"),), defaultextension='.pkl'))
 
     @staticmethod
     def export_data(database, file_path):
@@ -50,9 +50,9 @@ class Exporter:
 # Modified based on https://stackoverflow.com/a/40965385
 class AutoSave:
 
-    def __init__(self, Controller):
+    def __init__(self, controller):
         # Export arguments
-        self.controller = Controller
+        self.controller = controller
         self.file_path = Exporter.get_filepath()
         # Autosave runs every interval seconds
         self.interval = sanitize_timer(self.controller.view.display_user_input("enter_autosave_number_of_seconds"))

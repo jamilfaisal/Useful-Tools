@@ -3,7 +3,7 @@ import os
 
 import requests as requests
 
-from src.Data.Movie import Movie
+from NotionTools.MoviesTools.src.Data.Movie import Movie
 
 
 def get_database(database_filter=None):
@@ -16,8 +16,10 @@ def get_database(database_filter=None):
     try:
         with open(filename, mode='r') as f:
             secrets = json.loads(f.read())
+            print("Got authentication details.")
     except FileNotFoundError:
-        raise FileNotFoundError("Could not find secrets.json in the src folder. This is required for authentication with Notion.")
+        raise FileNotFoundError("Could not find secrets.json in the src folder. This is required for authentication "
+                                "with Notion.")
 
     url = "https://api.notion.com/v1/databases/{}/query".format(secrets["DB_ID"])
     sorts = [
@@ -42,6 +44,7 @@ def get_database(database_filter=None):
             "sorts": sorts
         }
 
+    print("First POST request to Notion to retrieve Movies")
     response = requests.post(url, json=payload, headers=headers)
     if response.status_code != 200:
         raise Exception("First POST call to get database rows failed with status code: {}, Text :{}",
@@ -51,6 +54,7 @@ def get_database(database_filter=None):
     # Notion Pagination limits results returned to 100 rows. Need to make further calls to get all rows of the database
     while response_formatted["has_more"]:
         payload["start_cursor"] = response_formatted["next_cursor"]
+        print("Next POST request to Notion to retrieve more Movies")
         response = requests.post(url, json=payload, headers=headers)
         if response.status_code != 200:
             raise Exception("Consequent POST call to get database rows failed with status code: {}, Text :{}",

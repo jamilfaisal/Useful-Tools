@@ -1,5 +1,8 @@
 /.idea/*
-/Best TV Episodes/Saved Data/*
-Movies Notion Page Tools/.idea
 .DS_Store
-Movies Notion Page Tools/secrets.json
+/NotionTools/BestTVEpisodes/Saved Data/*
+/NotionTools/MoviesTools/.idea
+/NotionTools/MoviesTools/secrets.json
+/NotionTools/MoviesTools/src/secrets.json
+/YoutubeChannelMostViewedVideos/.idea
+/YoutubeChannelMostViewedVideos/.env

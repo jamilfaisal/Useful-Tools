@@ -1,6 +1,6 @@
 from random import choice
-from src.Getters.MoviesGetter import get_movies_list
-from src.MoviePicker.utils import get_list_of_unwatched_movies
+from NotionTools.MoviesTools.src.Getters.MoviesGetter import get_movies_list
+from NotionTools.MoviesTools.src.MoviePicker.utils import get_list_of_unwatched_movies
 
 
 def print_movie_choice(movie_choice):

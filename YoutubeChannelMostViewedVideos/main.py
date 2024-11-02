@@ -58,5 +58,9 @@ if __name__ == "__main__":
     youtube = googleapiclient.discovery.build(api_service_name, api_version, developerKey=DEVELOPER_KEY)
 
     channel_id = ""  # Channel ID
+    if channel_id == "":
+        print("Channel ID not entered!")
+        exit(1)
+
     videos = get_videos_from_channel(channel_id)
     filter_videos_by_views(videos, min_views=500000)
