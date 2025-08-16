@@ -1,8 +1,58 @@
-/.idea/*
+
+# -------- Python artifacts --------
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+venv*/
+
+# Build / packaging
+build/
+dist/
+*.egg-info/
+pip-wheel-metadata/
+
+# Test / coverage / typecheck
+.pytest_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+htmlcov/
+pytestdebug.log
+
+# -------- IDE / Editor --------
+.idea/
+*.iml
+.vscode/
+# JetBrains workspace/config
+workspace.xml
+shelf/
+httpRequests/
+
+# OS files
 .DS_Store
-/NotionTools/BestTVEpisodes/Saved Data/*
-/NotionTools/MoviesTools/.idea
-/NotionTools/MoviesTools/secrets.json
-/NotionTools/MoviesTools/src/secrets.json
-/YoutubeTools/.idea
-/YoutubeTools/.env
+Thumbs.db
+desktop.ini
+
+# -------- Secrets / local configs --------
+.env
+.env.*
+**/secrets.json
+secrets.json
+
+# Logs and runtime files
+*.log
+*.pid
+*.sock
+
+# Misc
+node_modules/
+*.bak
+*.swp
+
